@@ -41,7 +41,7 @@ public class DivisionTest {
     @Test
     public void When_Divisornull_Expect_NullPointerException() {
         Integer isNull = null;
-        NullPointerException thrown = assertThrows( NullPointerException.class, () -> division.makeDivision(isNull, 12));
+        NullPointerException thrown = assertThrows( NullPointerException.class, () -> division.makeDivision(12, isNull));
         assertEquals("Divisor cannot be null", thrown.getMessage());  
     }
 
