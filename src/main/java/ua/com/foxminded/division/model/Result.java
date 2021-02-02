@@ -1,7 +1,17 @@
 package ua.com.foxminded.division.model;
 
-import java.util.ArrayList;
+import java.util.List;
+/**
+ * Date: Feb 01-2021 Class make integer division without
+ * fractional string part
+ *
+ * @author Aleksandr Serogin
+ * @version 1.0001
+ */
 
+/**
+ * saving incoming values
+ */
 public class Result {
 
     private final int dividend;
@@ -9,11 +19,17 @@ public class Result {
     private final int quotient;
     private final int remainder;
     private final int longChar;
-    private final ArrayList<Integer> subtrahend;
-    private final ArrayList<Integer> minuend;
-    private final ArrayList<Integer> numbersTabs;
-    private final int numbersCickle;
-    private final int longDivisor;
+    private final List<Integer> subtrahend;
+    private final List<Integer> minuend;
+    private final List<Integer> numbersTab;
+    private final int numbersCycle;
+    private final List<Integer> longMinued;
+    private final int longLastTab;
+    private final List<Integer> numbersTabsMinesOne;
+    private final int numbersСycleMinesOne;
+    private final int tabOneForStringTwo;
+    private final int tabTwoForStringTwo;
+    private final int longCharMinesOne;
 
     public Result(
             final int dividend,
@@ -21,12 +37,17 @@ public class Result {
             final int quotient,
             final int remainder,
             final int longChar,
-            final ArrayList<Integer> subtrahend,
-            final ArrayList<Integer> minuend,
-            final ArrayList<Integer> numbersTabs,
-            final int numbersCickle,
-            final int longDivisor)
-    {
+            final List<Integer> subtrahend,
+            final List<Integer> minuend,
+            final List<Integer> numbersTab,
+            final int numbersСycle,
+            final List<Integer> longMinued,
+            final int longLastTab,
+            final List<Integer> numbersTabsMinesOne,
+            final int numbersСyclesMinesOne,
+            final int tabOneForStringTwo,
+            final int tabTwoForStringTwo,
+            final int longCharMinesOne) {
         this.dividend = dividend;
         this.divisor = divisor;
         this.quotient = quotient;
@@ -34,11 +55,16 @@ public class Result {
         this.longChar = longChar;
         this.subtrahend = subtrahend;
         this.minuend = minuend;
-        this.numbersTabs = numbersTabs;
-        this.numbersCickle = numbersCickle;
-        this.longDivisor = longDivisor;
+        this.numbersTab = numbersTab;
+        this.numbersCycle = numbersСycle;
+        this.longMinued = longMinued;
+        this.longLastTab = longLastTab;
+        this.numbersTabsMinesOne = numbersTabsMinesOne;
+        this.numbersСycleMinesOne = numbersСyclesMinesOne;
+        this.tabOneForStringTwo = tabOneForStringTwo;
+        this.tabTwoForStringTwo = tabTwoForStringTwo;
+        this.longCharMinesOne = longCharMinesOne;
     }
-
 
     public int getDividend() {
         return dividend;
@@ -60,24 +86,93 @@ public class Result {
         return longChar;
     }
 
-    public ArrayList<Integer> getSubtrahend() {
+    public List<Integer> getSubtrahend() {
         return subtrahend;
     }
-    public ArrayList<Integer> getMinuend() {
+
+    public List<Integer> getMinuend() {
         return minuend;
     }
 
-    public ArrayList<Integer> getNumbersTabs() {
-        return numbersTabs;
-    }
-    public int getNumbersCickle() {
-
-        return numbersCickle;
+    public List<Integer> getNumbersTab() {
+        return numbersTab;
     }
 
-    public int getLongDivisor() {
-
-        return longDivisor;
+    public int getNumbersCycle() {
+        return numbersCycle;
     }
 
+    public List<Integer> getLongMinued() {
+        return longMinued;
+    }
+
+    public int getLongLastTab() {
+        return longLastTab;
+    }
+
+    public List<Integer> getNumbersTabMinesOne() {
+        return numbersTabsMinesOne;
+    }
+
+    public int getNumbersСycleMinesOne() {
+        return numbersСycleMinesOne;
+    }
+
+    public int getTabOneForStringTwo() {
+        return tabOneForStringTwo;
+    }
+
+    public int getTabTwoForStringTwo() {
+        return tabTwoForStringTwo;
+    }
+
+    public int getlongCharMinesOne() {
+        return longCharMinesOne;
+    }
+
+    @Override
+    public final boolean equals(Object obj) {
+       if (this == obj) return true;
+       if (!(obj instanceof Result)) return false;
+
+        Result result = (Result) obj;
+
+        if (dividend != result.dividend) return false;
+        if (divisor != result.divisor) return false;
+        if (quotient != result.quotient) return false;
+        if (remainder != result.remainder) return false;
+        if (longChar != result.longChar) return false;
+        if (numbersCycle != result.numbersCycle) return false;
+        if (longLastTab != result.longLastTab) return false;
+        if (numbersСycleMinesOne != result.numbersСycleMinesOne) return false;
+        if (tabOneForStringTwo != result.tabOneForStringTwo) return false;
+        if (tabTwoForStringTwo != result.tabTwoForStringTwo) return false;
+        if (longCharMinesOne != result.longCharMinesOne) return false;
+        if (subtrahend != null ? !subtrahend.equals(result.subtrahend) : result.subtrahend != null) return false;
+        if (minuend != null ? !minuend.equals(result.minuend) : result.minuend != null) return false;
+        if (numbersTab != null ? !numbersTab.equals(result.numbersTab) : result.numbersTab != null) return false;
+        if (longMinued != null ? !longMinued.equals(result.longMinued) : result.longMinued != null) return false;
+        return numbersTabsMinesOne != null ? numbersTabsMinesOne.equals(result.numbersTabsMinesOne) : result.numbersTabsMinesOne == null;
+    }
+
+    @Override
+    public final int hashCode() {
+        int result = dividend;
+        result = 31 * result + divisor;
+        result = 31 * result + quotient;
+        result = 31 * result + remainder;
+        result = 31 * result + longChar;
+        result = 31 * result + (subtrahend != null ? subtrahend.hashCode() : 0);
+        result = 31 * result + (minuend != null ? minuend.hashCode() : 0);
+        result = 31 * result + (numbersTab != null ? numbersTab.hashCode() : 0);
+        result = 31 * result + numbersCycle;
+        result = 31 * result + (longMinued != null ? longMinued.hashCode() : 0);
+        result = 31 * result + longLastTab;
+        result = 31 * result + (numbersTabsMinesOne != null ? numbersTabsMinesOne.hashCode() : 0);
+        result = 31 * result + numbersСycleMinesOne;
+        result = 31 * result + tabOneForStringTwo;
+        result = 31 * result + tabTwoForStringTwo;
+        result = 31 * result + longCharMinesOne;
+        return result;
+    }
 }

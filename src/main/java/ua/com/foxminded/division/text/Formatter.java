@@ -2,61 +2,77 @@ package ua.com.foxminded.division.text;
 
 import ua.com.foxminded.division.model.Result;
 
-import java.util.ArrayList;
+import java.util.List;
+/**
+ * Date: Feb 01-2021 Class make integer division without
+ * fractional string part
+ *
+ * @author Aleksandr Serogin
+ * @version 1.0001
+ */
 
+/**
+ * format string with given values
+ */
 public class Formatter {
 
-    final StringBuilder finalString = new StringBuilder(); // final format string return with result
-
+    /**
+     * @param result input object class Result
+     * @return format string
+     */
     public String format(Result result) {
 
         final int dividend = result.getDividend();
         final int divisor = result.getDivisor();
         final int quotient = result.getQuotient();
         final int remainder = result.getRemainder();
-        final int longChar = result.getLongChar();
-        final int longDivisor = result.getLongDivisor();
-        final Integer numbersCickle = result.getNumbersCickle();
-        final ArrayList<Integer> subtrahend = result.getSubtrahend();
-        final ArrayList<Integer> finalReminder = result.getMinuend();
-        final ArrayList<Integer> numbersTabs = result.getNumbersTabs();
-        int tempLens3String = 0;
-        for (int i = 0; i < numbersCickle; i++) {
-            String multiply;
-            tempLens3String = (int) (numbersTabs.get(i) + finalReminder.get(i).longValue());
+        final int longChar = result.getLongChar(); // number of dashes for two lines
+        final int longLastTab = result.getLongLastTab();
+        final int tabOneForStringTwo = result.getTabOneForStringTwo();
+        final int tabTwoForStringTwo = result.getTabTwoForStringTwo();
+        final int numbersCycle = result.getNumbersCycle();
+        final int longCharMinesOne = result.getlongCharMinesOne();
+        int numbersCycleMinesOne = result.getNumbersСycleMinesOne();
+        final List<Integer> subtrahend = result.getSubtrahend();
+        final List<Integer> numbersTabsMinesOne = result.getNumbersTabMinesOne();
+        final List<Integer> minuend = result.getMinuend();
+        final List<Integer> numbersTab = result.getNumbersTab();
+        final List<Integer> longMinued = result.getLongMinued();
+        final StringBuilder finalString = new StringBuilder(); // final format string return with result
 
-            String lastReminder = String.format("%s", assemblyString(numbersTabs.get(i) - 1, ' ') + "_" + finalReminder.get(i));
+        // string formatting with given values
+        for (int i = 0; i < numbersCycle; i++) {
+            String multiply;
+            String lastReminder = String.format("%s", assemblyString(numbersTabsMinesOne.get(i), ' ') + "_" + minuend.get(i));
             finalString.append(lastReminder).append("\n");
             if (i == 0) {
-                multiply = String.format("%s", assemblyString(numbersTabs.get(i) - 1, ' ') + subtrahend.get(i));
+                multiply = String.format("%s", assemblyString(numbersTabsMinesOne.get(i), ' ') + subtrahend.get(i));
             } else {
-                multiply = String.format("%s", assemblyString(numbersTabs.get(i), ' ') + subtrahend.get(i));
+                multiply = String.format("%s", assemblyString(numbersTab.get(i), ' ') + subtrahend.get(i));
             }
             finalString.append(multiply).append("\n");
-            finalString.append(makeDivider(finalReminder.get(i), numbersTabs.get(i))).append("\n");
-            if (i == numbersCickle.longValue() - 1) {
-                finalString.append(String.format("%s", assemblyString(numbersTabs.get(i), ' ') + remainder)).append("\n");
+            finalString.append(makeDivider(longMinued.get(i), numbersTab.get(i))).append("\n");
+            if (i == numbersCycleMinesOne) {
+                finalString.append(String.format("%s", assemblyString(longLastTab, ' ') + remainder)).append("\n");
             }
         }
-        modifyResultToView(dividend, divisor, quotient, longChar, longDivisor); // celled function format string
+        modifyResultToView(dividend, divisor, quotient, longChar, finalString, tabOneForStringTwo,
+                tabTwoForStringTwo, longCharMinesOne); // celled function format string
         return finalString.toString(); // return format string
     }
 
     /**
-     * @param numberDashes declared number of dashes
-     * @param numberTabs   declared number of tabs
-     * @return
+     * @param numbersDashes numbers dashes
+     * @param numbersTabs   numbers tabs
+     * @return format string
      */
-    private String makeDivider(Integer numberDashes, Integer numberTabs) { // append in string tabs and dash
-        return assemblyString(numberTabs, ' ') + assemblyString(calculateDigit(numberDashes), '-');
+    private String makeDivider(Integer numbersDashes, Integer numbersTabs) { // append in string tabs and dash
+        return assemblyString(numbersTabs, ' ') + assemblyString(numbersDashes, '-');
     }
 
-    /**
-     * @param dividend value
-     * @param divisor  value
-     * @param longChar
-     */
-    private void modifyResultToView(Integer dividend, Integer divisor, Integer quotient, int longChar, int longDivisor) {
+    // format first tree lines
+    private void modifyResultToView(Integer dividend, Integer divisor, Integer quotient, int longChar,
+                                    StringBuilder finalString, int tabTwoPartOne, int tabTwoPartTwo, int longCharMinesOne) {
         int[] index = new int[3];
         for (int i = 0, j = 0; i < finalString.length(); i++) {
             if (finalString.charAt(i) == '\n') { // calculated index and of string
@@ -67,23 +83,21 @@ public class Formatter {
                 break;
             }
         }
-        int tabIndex1 = calculateDigit(dividend) + 1 - index[0]; // calculated number of tabs for 1 string
-        finalString.insert(index[2], assemblyString(longChar - 1, ' ') + "│" + quotient.toString());
-        finalString.insert(index[1], assemblyString(tabIndex1, ' ') + "│" + assemblyString(longChar, '-'));
-        finalString.insert((index[1] - longDivisor), ' ');
+        finalString.insert(index[2], assemblyString(longCharMinesOne, ' ') + "│" + quotient.toString());
+        finalString.insert(index[1], assemblyString(tabTwoPartOne, ' ') + "│" + assemblyString(longChar, '-'));
+        finalString.insert(tabTwoPartTwo, ' ');
         finalString.insert(index[0], "│" + divisor);
         finalString.replace(1, index[0], dividend.toString());
     }
 
-    private int calculateDigit(int number) { // get number length
-        return (int) Math.log10(number) + 1;
-    }
-
-    private String assemblyString(int numberOfSymbols, char symbol) {
+    /**
+     * @param numbersOfSymbols numbers of symbols
+     * @param symbol
+     * @return format string
+     */
+    private String assemblyString(int numbersOfSymbols, char symbol) {
         StringBuilder string = new StringBuilder();
-        for (int i = 0; i < numberOfSymbols; i++) {
-            string.append(symbol);
-        }
+        string.append(String.valueOf(symbol).repeat(Math.max(0, numbersOfSymbols)));
         return string.toString();
     }
 }
