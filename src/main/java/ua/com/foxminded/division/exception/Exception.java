@@ -10,10 +10,7 @@ public class Exception {
             throw new IllegalArgumentException("Divider is zero. Can't division by zero");
         }
         if (dividend < divisor) {
-            throw new IllegalArgumentException("Dividend is lower them divider");
-        }
-        if (divisor < 0) {
-            throw new IllegalArgumentException("Divider is below zero");
+            throw new IllegalArgumentException("Divisor cannot be greater than dividend.");
         }
     }
 }

@@ -131,11 +131,11 @@ public class Result {
     }
 
     @Override
-    public final boolean equals(Object obj) {
-       if (this == obj) return true;
-       if (!(obj instanceof Result)) return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        Result result = (Result) obj;
+        Result result = (Result) o;
 
         if (dividend != result.dividend) return false;
         if (divisor != result.divisor) return false;
@@ -156,7 +156,7 @@ public class Result {
     }
 
     @Override
-    public final int hashCode() {
+    public int hashCode() {
         int result = dividend;
         result = 31 * result + divisor;
         result = 31 * result + quotient;

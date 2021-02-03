@@ -1,5 +1,6 @@
 package ua.com.foxminded.division;
 
+import ua.com.foxminded.division.math.Divider;
 import ua.com.foxminded.division.model.Result;
 import ua.com.foxminded.division.text.Formatter;
 

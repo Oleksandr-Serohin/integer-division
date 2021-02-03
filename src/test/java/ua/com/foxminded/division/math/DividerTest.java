@@ -1,4 +1,4 @@
-package ua.com.foxminded.division;
+package ua.com.foxminded.division.math;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,8 +10,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DividerTest {
+
     Divider divider;
-    Result result;
+    Result exp, act;
 
     @BeforeEach
     public void setUp() {
@@ -19,7 +20,7 @@ class DividerTest {
     }
 
     @Test
-    void testAssertTrue() {
+    void testAssertTrue_DivideRightCalculated() {
         final int dividend = 78945;
         final int divisor = 4;
         final int quotient = 19736;
@@ -47,11 +48,11 @@ class DividerTest {
         minuend.add(29);
         minuend.add(14);
         minuend.add(25);
-        numbersTab.add(0);
-        numbersTab.add(0);
+        numbersTab.add(1);
         numbersTab.add(1);
         numbersTab.add(2);
         numbersTab.add(3);
+        numbersTab.add(4);
         longMinued.add(1);
         longMinued.add(2);
         longMinued.add(2);
@@ -62,7 +63,7 @@ class DividerTest {
         numbersTabMinesOne.add(1);
         numbersTabMinesOne.add(2);
         numbersTabMinesOne.add(3);
-        result = new Result(dividend,
+        exp = new Result(dividend,
                 divisor,
                 quotient,
                 remainder,
@@ -78,26 +79,8 @@ class DividerTest {
                 tabOneForStringTwo,
                 tabTwoForStringTwo,
                 longCharMinesOne);
-        Result div = divider.divide(78945, 4);
+        act = divider.divide(78945, 4);
 
-        boolean equals = div.equals(result);
-        System.out.println(equals);
-        assertEquals(result.getDividend(), div.getDividend());
-        assertEquals(result.getSubtrahend(), div.getSubtrahend());
-        assertEquals(result.getDivisor(), div.getDivisor());
-        assertEquals(result.getLongChar(), div.getLongChar());
-        assertEquals(result.getlongCharMinesOne(), div.getlongCharMinesOne());
-        assertEquals(result.getLongLastTab(), div.getLongLastTab());
-        assertEquals(result.getLongMinued(), div.getLongMinued());
-        assertEquals(result.getNumbersCycle(), div.getNumbersCycle());
-        assertEquals(result.getNumbersTabMinesOne(), div.getNumbersTabMinesOne());
-        assertEquals(result.getNumbersTab(), div.getNumbersTabMinesOne());
-        assertEquals(result.getNumbersСycleMinesOne(), div.getNumbersСycleMinesOne());
-        assertEquals(result.getMinuend(), div.getMinuend());
-        assertEquals(result.getQuotient(), div.getQuotient());
-        assertEquals(result.getRemainder(), div.getRemainder());
-        assertEquals(result.getTabOneForStringTwo(), div.getTabOneForStringTwo());
-        assertEquals(result.getTabTwoForStringTwo(), div.getTabTwoForStringTwo());
-
+        assertEquals(exp, act);
     }
 }

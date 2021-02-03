@@ -1,4 +1,4 @@
-package ua.com.foxminded.division;
+package ua.com.foxminded.division.math;
 
 import ua.com.foxminded.division.exception.Exception;
 import ua.com.foxminded.division.model.Result;
