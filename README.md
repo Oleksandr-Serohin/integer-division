@@ -36,13 +36,15 @@ For exampl
 * This tells the system where to find JDK programs.
 
  >javac C:\ua\com\foxminded\division\*.java*
+ 
  >javac C:\ua\com\foxminded\division\*\*.java*
 
 * This runs javac.exe, the compiler. You should see nothing but the next system prompt...
 
  >C:\ua\com\foxminded\division\*
 ```
-javac has created the Divider.class and Main.class, Exception.class, Result.class, Formatter.class file. You should see Divider.class, Main.class, Exception.class, Result.class, Formatter.class  
+javac has created the Divider.class and Main.class, Exception.class, Result.class, Formatter.class file. 
+You should see Divider.class, Main.class, Exception.class, Result.class, Formatter.class  
 and Divider.java, Main.java, Exception.java, Result.java, Formatter.java among the files.
 ```
 
