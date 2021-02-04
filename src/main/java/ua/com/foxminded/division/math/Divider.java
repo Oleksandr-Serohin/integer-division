@@ -25,8 +25,8 @@ public class Divider {
      * @return Object class Result
      */
     public Result divide(Integer dividend, Integer divisor) {
-        Validator exception = new Validator();
-        exception.validateArguments(dividend, divisor); // check the validity of values
+        Validator validator = new Validator();
+        validator.validateArguments(dividend, divisor); // check the validity of values
         int quotient = getQuotient(dividend, divisor);
         int remainder = getRemainder(dividend, divisor);
         int longChar = getLongChar(quotient);
@@ -211,8 +211,7 @@ public class Divider {
             }
         }
         return result;
-
-    }
+   }
 
     /**
      * @param minuend
