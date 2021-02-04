@@ -12,19 +12,19 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FormatterTest {
-
+    private static Divider divider;
     private static Result resultMock;
     private static Formatter formatter;
 
     @BeforeEach
     public void setUp() {
-        resultMock = Mockito.mock(Result.class);
         formatter = new Formatter();
+        divider = new Divider();
     }
 
     @Test
     public void shouldFormatString_WithPositiveNumbersVar1() {
-
+        resultMock = Mockito.mock(Result.class);
         final int dividend = 78945;
         final int divisor = 4;
         final int quotient = 19736;
@@ -106,9 +106,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithPositiveNumbersVar2() {
-        Divider divider = new Divider();
         Result result = divider.divide(630440, 610);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
 
         String expected = """
@@ -128,9 +126,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithPositiveNumbersVar3() {
-        Divider divider = new Divider();
         Result result = divider.divide(12341234, 1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _12341234│1234
@@ -146,9 +142,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithPositiveNumbersVar4() {
-        Divider divider = new Divider();
         Result result = divider.divide(593593593, 593);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _593593593│593
@@ -167,11 +161,9 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithPositiveNumbersVar5() {
-        Divider divider = new Divider();
         Result result = divider.divide(12351234, 1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
-         String expected = """
+        String expected = """
                 _12351234│1234
                  1234    │-----
                  ----    │10009
@@ -185,9 +177,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithPositiveNumbersVar6() {
-        Divider divider = new Divider();
         Result result = divider.divide(12341233, 1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _12341233│1234
@@ -200,9 +190,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithPositiveNumbersVar7() {
-        Divider divider = new Divider();
         Result result = divider.divide(12353574, 1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _12353574│1234
@@ -221,9 +209,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithPositiveNumbersVar8() {
-        Divider divider = new Divider();
         Result result = divider.divide(12350000, 1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _12350000│1234
@@ -239,9 +225,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithPositiveNumbersVar9() {
-        Divider divider = new Divider();
         Result result = divider.divide(12341234, 1);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _12341234│1
@@ -275,9 +259,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithPositiveNumbersVar10() {
-        Divider divider = new Divider();
         Result result = divider.divide(12340035, 1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _12340035│1234
@@ -290,9 +272,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithPositiveNumbersVar11() {
-        Divider divider = new Divider();
         Result result = divider.divide(345, 8);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _345│8
@@ -308,9 +288,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithPositiveNumbersVar12() {
-        Divider divider = new Divider();
         Result result = divider.divide(10000, 2);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _10000│2
@@ -323,9 +301,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithPositiveNumbersVar13() {
-        Divider divider = new Divider();
         Result result = divider.divide(10000, 20);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _10000│20
@@ -338,9 +314,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithPositiveNumbersVar14() {
-        Divider divider = new Divider();
         Result result = divider.divide(6546532, 113);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _6546532│113
@@ -365,9 +339,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithPositiveNumbersVar15() {
-        Divider divider = new Divider();
         Result result = divider.divide(405022500, 45);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _405022500│45
@@ -383,9 +355,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDividendVar1() {
-        Divider divider = new Divider();
         Result result = divider.divide(-78454, 4);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-78454│4
@@ -406,15 +376,12 @@ class FormatterTest {
                      -2
                 """;
         assertEquals(expected, output);
-     }
+    }
 
     @Test
     public void shouldFormatString_WithNegativeDividendVar2() {
-        Divider divider = new Divider();
         Result result = divider.divide(-630440, 610);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
-
         String expected = """
                 _-630440│610
                   610   │-----
@@ -432,9 +399,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDividendVar3() {
-        Divider divider = new Divider();
         Result result = divider.divide(-12341234, 1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-12341234│1234
@@ -450,9 +415,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDividendVar4() {
-        Divider divider = new Divider();
         Result result = divider.divide(-593593593, 593);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-593593593│593
@@ -471,9 +434,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDividendVar5() {
-        Divider divider = new Divider();
         Result result = divider.divide(-12351234, 1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-12351234│1234
@@ -489,9 +450,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDividendVar6() {
-        Divider divider = new Divider();
         Result result = divider.divide(-12341233, 1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-12341233│1234
@@ -504,9 +463,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDividendVar7() {
-        Divider divider = new Divider();
         Result result = divider.divide(-12353574, 1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-12353574│1234
@@ -525,9 +482,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDividendVar8() {
-        Divider divider = new Divider();
         Result result = divider.divide(-12350000, 1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-12350000│1234
@@ -543,9 +498,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDividendVar9() {
-        Divider divider = new Divider();
         Result result = divider.divide(-12341234, 1);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-12341234│1
@@ -579,9 +532,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDividendVar10() {
-        Divider divider = new Divider();
         Result result = divider.divide(-12340035, 1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-12340035│1234
@@ -594,9 +545,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDividendVar11() {
-        Divider divider = new Divider();
         Result result = divider.divide(-345, 8);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-345│8
@@ -612,9 +561,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDividendVar12() {
-        Divider divider = new Divider();
         Result result = divider.divide(-10000, 2);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-10000│2
@@ -627,9 +574,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDividendVar13() {
-        Divider divider = new Divider();
         Result result = divider.divide(-10000, 20);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-10000│20
@@ -642,9 +587,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDividendVar14() {
-        Divider divider = new Divider();
         Result result = divider.divide(-6546532, 113);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-6546532│113
@@ -669,9 +612,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDividendVar15() {
-        Divider divider = new Divider();
         Result result = divider.divide(-405022500, 45);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-405022500│45
@@ -687,9 +628,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeNumberVar1() {
-        Divider divider = new Divider();
         Result result = divider.divide(405022500, 45);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _405022500│45
@@ -705,9 +644,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeNumberVar2() {
-        Divider divider = new Divider();
         Result result = divider.divide(-78454, -4);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-78454│-4
@@ -732,9 +669,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeNumberVar3() {
-        Divider divider = new Divider();
         Result result = divider.divide(-630440, -610);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
 
         String expected = """
@@ -754,9 +689,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeNumberVar4() {
-        Divider divider = new Divider();
         Result result = divider.divide(-12341234, -1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-12341234│-1234
@@ -772,9 +705,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeNumberVar5() {
-        Divider divider = new Divider();
         Result result = divider.divide(-593593593, -593);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-593593593│-593
@@ -793,9 +724,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeNumberVar6() {
-        Divider divider = new Divider();
         Result result = divider.divide(-12351234, -1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-12351234│-1234
@@ -811,9 +740,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeNumberVar7() {
-        Divider divider = new Divider();
         Result result = divider.divide(-12341233, -1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-12341233│-1234
@@ -826,9 +753,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeNumberVar8() {
-        Divider divider = new Divider();
         Result result = divider.divide(-12353574, -1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-12353574│-1234
@@ -847,9 +772,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeNumberVar9() {
-        Divider divider = new Divider();
         Result result = divider.divide(-12350000, -1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-12350000│-1234
@@ -865,9 +788,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeNumberVar10() {
-        Divider divider = new Divider();
         Result result = divider.divide(-12341234, -1);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-12341234│-1
@@ -901,9 +822,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeNumberVar11() {
-        Divider divider = new Divider();
         Result result = divider.divide(-12340035, -1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-12340035│-1234
@@ -916,9 +835,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeNumberVar12() {
-        Divider divider = new Divider();
         Result result = divider.divide(-345, -8);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-345│-8
@@ -934,9 +851,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeNumberVar13() {
-        Divider divider = new Divider();
         Result result = divider.divide(-10000, -2);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-10000│-2
@@ -949,9 +864,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeNumberVar14() {
-        Divider divider = new Divider();
         Result result = divider.divide(-10000, -20);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-10000│-20
@@ -964,9 +877,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeNumberVar15() {
-        Divider divider = new Divider();
         Result result = divider.divide(-6546532, -113);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _-6546532│-113
@@ -988,11 +899,10 @@ class FormatterTest {
                 """;
         assertEquals(expected, output);
     }
+
     @Test
     public void shouldFormatString_WithNegativeDivisorVar1() {
-        Divider divider = new Divider();
         Result result = divider.divide(630440, -610);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
 
         String expected = """
@@ -1012,9 +922,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDivisorVar2() {
-        Divider divider = new Divider();
         Result result = divider.divide(12341234, -1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _12341234│-1234
@@ -1030,9 +938,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDivisorVar3() {
-        Divider divider = new Divider();
         Result result = divider.divide(593593593, -593);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _593593593│-593
@@ -1051,9 +957,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDivisorVar4() {
-        Divider divider = new Divider();
         Result result = divider.divide(12351234, -1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _12351234│-1234
@@ -1069,9 +973,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDivisorVar5() {
-        Divider divider = new Divider();
         Result result = divider.divide(12341233, -1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _12341233│-1234
@@ -1084,9 +986,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDivisorVar6() {
-        Divider divider = new Divider();
         Result result = divider.divide(12353574, -1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _12353574│-1234
@@ -1105,9 +1005,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDivisorVar7() {
-        Divider divider = new Divider();
         Result result = divider.divide(12350000, -1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _12350000│-1234
@@ -1123,9 +1021,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDivisorVar8() {
-        Divider divider = new Divider();
         Result result = divider.divide(12341234, -1);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _12341234│-1
@@ -1159,9 +1055,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDivisorVar9() {
-        Divider divider = new Divider();
         Result result = divider.divide(12340035, -1234);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _12340035│-1234
@@ -1174,9 +1068,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDivisorVar10() {
-        Divider divider = new Divider();
         Result result = divider.divide(345, -8);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _345│-8
@@ -1192,9 +1084,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDivisorVar11() {
-        Divider divider = new Divider();
         Result result = divider.divide(10000, -2);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _10000│-2
@@ -1207,9 +1097,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDivisorVar12() {
-        Divider divider = new Divider();
         Result result = divider.divide(10000, -20);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _10000│-20
@@ -1222,9 +1110,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDivisorVar13() {
-        Divider divider = new Divider();
         Result result = divider.divide(6546532, -113);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _6546532│-113
@@ -1249,9 +1135,7 @@ class FormatterTest {
 
     @Test
     public void shouldFormatString_WithNegativeDivisorVar14() {
-        Divider divider = new Divider();
         Result result = divider.divide(405022500, -45);
-        Formatter formatter = new Formatter();
         String output = formatter.format(result);
         String expected = """
                 _405022500│-45
@@ -1265,4 +1149,3 @@ class FormatterTest {
         assertEquals(expected, output);
     }
 }
-
