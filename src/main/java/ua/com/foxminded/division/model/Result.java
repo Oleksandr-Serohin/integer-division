@@ -29,7 +29,7 @@ public class Result {
     private final int numbersСycleMinesOne;
     private final int tabOneForStringTwo;
     private final int tabTwoForStringTwo;
-    private final int longCharMinesOne;
+    private final int tabTwoForStringThree;
 
     public Result(
             final int dividend,
@@ -47,7 +47,7 @@ public class Result {
             final int numbersСyclesMinesOne,
             final int tabOneForStringTwo,
             final int tabTwoForStringTwo,
-            final int longCharMinesOne) {
+            final int tabTwoForStringThree) {
         this.dividend = dividend;
         this.divisor = divisor;
         this.quotient = quotient;
@@ -63,7 +63,7 @@ public class Result {
         this.numbersСycleMinesOne = numbersСyclesMinesOne;
         this.tabOneForStringTwo = tabOneForStringTwo;
         this.tabTwoForStringTwo = tabTwoForStringTwo;
-        this.longCharMinesOne = longCharMinesOne;
+        this.tabTwoForStringThree = tabTwoForStringThree;
     }
 
     public int getDividend() {
@@ -126,14 +126,14 @@ public class Result {
         return tabTwoForStringTwo;
     }
 
-    public int getlongCharMinesOne() {
-        return longCharMinesOne;
+    public int getTabTwoForStringThree() {
+        return tabTwoForStringThree;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Result)) return false;
 
         Result result = (Result) o;
 
@@ -147,7 +147,7 @@ public class Result {
         if (numbersСycleMinesOne != result.numbersСycleMinesOne) return false;
         if (tabOneForStringTwo != result.tabOneForStringTwo) return false;
         if (tabTwoForStringTwo != result.tabTwoForStringTwo) return false;
-        if (longCharMinesOne != result.longCharMinesOne) return false;
+        if (tabTwoForStringThree != result.tabTwoForStringThree) return false;
         if (subtrahend != null ? !subtrahend.equals(result.subtrahend) : result.subtrahend != null) return false;
         if (minuend != null ? !minuend.equals(result.minuend) : result.minuend != null) return false;
         if (numbersTab != null ? !numbersTab.equals(result.numbersTab) : result.numbersTab != null) return false;
@@ -172,7 +172,7 @@ public class Result {
         result = 31 * result + numbersСycleMinesOne;
         result = 31 * result + tabOneForStringTwo;
         result = 31 * result + tabTwoForStringTwo;
-        result = 31 * result + longCharMinesOne;
+        result = 31 * result + tabTwoForStringThree;
         return result;
     }
 }

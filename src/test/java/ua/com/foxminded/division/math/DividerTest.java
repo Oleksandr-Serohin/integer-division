@@ -36,7 +36,7 @@ class DividerTest {
         final int numbersСycleMinesOne = 4;
         final int tabOneForStringTwo = 4;
         final int tabTwoForStringTwo = 3;
-        final int longCharMinesOne = 4;
+        final int tabTwoForStringThree = 4;
 
         subtrahend.add(4);
         subtrahend.add(36);
@@ -78,7 +78,7 @@ class DividerTest {
                 numbersСycleMinesOne,
                 tabOneForStringTwo,
                 tabTwoForStringTwo,
-                longCharMinesOne);
+                tabTwoForStringThree);
         act = divider.divide(78945, 4);
 
         assertEquals(exp, act);

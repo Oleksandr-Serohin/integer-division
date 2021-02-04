@@ -26,20 +26,19 @@ public class Formatter {
         final int divisor = result.getDivisor();
         final int quotient = result.getQuotient();
         final int remainder = result.getRemainder();
-        final int longChar = result.getLongChar(); // number of dashes for two lines
+        final int longChar = result.getLongChar();
         final int longLastTab = result.getLongLastTab();
         final int tabOneForStringTwo = result.getTabOneForStringTwo();
         final int tabTwoForStringTwo = result.getTabTwoForStringTwo();
         final int numbersCycle = result.getNumbersCycle();
-        final int longCharMinesOne = result.getlongCharMinesOne();
-        int numbersCycleMinesOne = result.getNumbersСycleMinesOne();
+        final int tabTwoForStringThree = result.getTabTwoForStringThree();
+        final int numbersCycleMinesOne = result.getNumbersСycleMinesOne();
         final List<Integer> subtrahend = result.getSubtrahend();
         final List<Integer> numbersTabsMinesOne = result.getNumbersTabMinesOne();
         final List<Integer> minuend = result.getMinuend();
         final List<Integer> numbersTab = result.getNumbersTab();
         final List<Integer> longMinued = result.getLongMinued();
-        final StringBuilder finalString = new StringBuilder(); // final format string return with result
-
+        final StringBuilder finalString = new StringBuilder();
         // string formatting with given values
         for (int i = 0; i < numbersCycle; i++) {
             String multiply;
@@ -51,13 +50,16 @@ public class Formatter {
                 multiply = String.format("%s", assemblyString(numbersTab.get(i), ' ') + subtrahend.get(i));
             }
             finalString.append(multiply).append("\n");
+            if (dividend < 0 & i == 0) {
+                finalString.append(" ");
+            }
             finalString.append(makeDivider(longMinued.get(i), numbersTab.get(i))).append("\n");
             if (i == numbersCycleMinesOne) {
                 finalString.append(String.format("%s", assemblyString(longLastTab, ' ') + remainder)).append("\n");
             }
         }
         modifyResultToView(dividend, divisor, quotient, longChar, finalString, tabOneForStringTwo,
-                tabTwoForStringTwo, longCharMinesOne); // celled function format string
+                tabTwoForStringTwo, tabTwoForStringThree); // celled function format string
         return finalString.toString(); // return format string
     }
 
@@ -72,7 +74,8 @@ public class Formatter {
 
     // format first tree lines
     private void modifyResultToView(Integer dividend, Integer divisor, Integer quotient, int longChar,
-                                    StringBuilder finalString, int tabTwoPartOne, int tabTwoPartTwo, int longCharMinesOne) {
+                                    StringBuilder finalString, int tabOneForStringTwo, int tabTwoForStringTwo,
+                                    int tabTwoForStringThree) {
         int[] index = new int[3];
         for (int i = 0, j = 0; i < finalString.length(); i++) {
             if (finalString.charAt(i) == '\n') { // calculated index and of string
@@ -83,9 +86,15 @@ public class Formatter {
                 break;
             }
         }
-        finalString.insert(index[2], assemblyString(longCharMinesOne, ' ') + "│" + quotient.toString());
-        finalString.insert(index[1], assemblyString(tabTwoPartOne, ' ') + "│" + assemblyString(longChar, '-'));
-        finalString.insert(tabTwoPartTwo, ' ');
+
+        finalString.insert(index[2], assemblyString(tabTwoForStringThree, ' ') + "│" + quotient.toString());
+
+        finalString.insert(index[1], assemblyString(tabOneForStringTwo, ' ') + "│" + assemblyString(longChar, '-'));
+        if (dividend < 0) {
+            finalString.insert(tabTwoForStringTwo, assemblyString(2, ' '));
+        } else {
+            finalString.insert(tabTwoForStringTwo, ' ');
+        }
         finalString.insert(index[0], "│" + divisor);
         finalString.replace(1, index[0], dividend.toString());
     }

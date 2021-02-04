@@ -1,10 +1,11 @@
 package ua.com.foxminded.division.math;
 
-import ua.com.foxminded.division.exception.Exception;
+import ua.com.foxminded.division.exception.Validator;
 import ua.com.foxminded.division.model.Result;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Date: Feb 01-2021 Class make integer division without
@@ -16,34 +17,44 @@ import java.util.stream.Collectors;
 
 public class Divider {
 
+    private ArrayList<Integer> numbersTab;
+
     /**
      * @param dividend
      * @param divisor
      * @return Object class Result
      */
     public Result divide(Integer dividend, Integer divisor) {
-        Exception exception = new Exception();
+        Validator exception = new Validator();
         exception.validateArguments(dividend, divisor); // check the validity of values
         int quotient = getQuotient(dividend, divisor);
         int remainder = getRemainder(dividend, divisor);
         int longChar = getLongChar(quotient);
         int longDividend = getLongDividend(dividend);
-        ArrayList<Integer> subtrahend = getSubtrahend(quotient, divisor);
-        ArrayList<Integer> minuend = getMinuend(dividend, divisor);
-        ArrayList<Integer> numbersTab = getNumbersTab(dividend, divisor, subtrahend);
+        int positiveDividend = getPositiveNumber(dividend);
+        int positiveDivisor = getPositiveNumber(divisor);
+        int positiveQuotient = getPositiveNumber(quotient);
+        int positiveRemainder = getPositiveNumber(remainder);
+        ArrayList<Integer> subtrahend = getSubtrahend(positiveQuotient, positiveDivisor);
+        ArrayList<Integer> minuend = getMinuend(positiveDividend, positiveDivisor);
+        ArrayList<Integer> numbersTab = getNumbersTab(dividend, divisor, minuend, longDividend);
         ArrayList<Integer> longMinued = getLongMinued(minuend);
         ArrayList<Integer> numbersTabMinesOne = getNumbersTabsMinesOne(numbersTab);
         int numbersCycle = getNumbersCycle(minuend);
         int numbersСycleMinesOne = getNumbersСycleMinesOne(numbersCycle);
         int tabOneForStringTwo = getTabOneForStringTwo(subtrahend, longDividend);
-        int tabTwoForStringTwo = getTabTwoForStringTwo(subtrahend);
-        int longLastTab = getLongLastTab(remainder, longDividend, longMinued, subtrahend);
-        int longCharMinesOne = getlongCharMinesOne(longChar);
+        int tabTwoForStringTwo = getTabTwoForStringTwo(subtrahend, dividend);
+        int longLastTab = getLongLastTab(positiveRemainder, longDividend, longMinued, subtrahend, dividend, divisor);
+        int tabTwoForStringThree = getTabTwoForStringThree(longChar, dividend, divisor);
         // saving calculation result
         Result results = new Result(dividend, divisor, quotient, remainder, longChar, subtrahend, minuend, numbersTab,
                 numbersCycle, longMinued, longLastTab, numbersTabMinesOne, numbersСycleMinesOne,
-                tabOneForStringTwo, tabTwoForStringTwo, longCharMinesOne);
+                tabOneForStringTwo, tabTwoForStringTwo, tabTwoForStringThree);
         return results;
+    }
+
+    private Integer getPositiveNumber(int number) {
+        return Math.abs(number);
     }
 
     /**
@@ -53,15 +64,16 @@ public class Divider {
     private ArrayList<Integer> numberDigit(Integer digits) {
         final int base = 10; //could be anything
         final ArrayList<Integer> result = new ArrayList<>();
-        while (digits != 0) {
+        while (true) {
+            if (digits == 0) break;
             result.add(digits % (base));
             digits = digits / base;
         }
-        for (int i = 0; i < result.size() / 2; i++) {
+        IntStream.range(0, result.size() / 2).forEach(i -> {
             int tmp = result.get(i);
             result.set(i, result.get(result.size() - i - 1));
             result.set(result.size() - i - 1, tmp);
-        }
+        });
         return result;
     }
 
@@ -93,7 +105,7 @@ public class Divider {
      * @param divisor
      * @return ArrayList subtrahend
      */
-    private ArrayList<Integer> getSubtrahend(int quotient, Integer divisor) {
+    private ArrayList<Integer> getSubtrahend(int quotient, int divisor) {
         ArrayList<Integer> subtrahend = new ArrayList<>();
         ArrayList<Integer> numbersQuotient = numberDigit(quotient);
         for (Integer integer : numbersQuotient) {
@@ -111,7 +123,7 @@ public class Divider {
      */
     private ArrayList<Integer> getMinuend(Integer dividend, Integer divisor) {
         final StringBuilder partiallyConstructedQuotient = new StringBuilder(); // write format reminder
-        ArrayList<Integer> Minuend = new ArrayList<>();
+        ArrayList<Integer> minuend = new ArrayList<>();
         String[] digits = String.valueOf(dividend).split("");
         Integer finalReminder; // declared partially-constructed quotient
         int partiallyConstructedRemainder; // declared partially-constructed remainder
@@ -120,36 +132,49 @@ public class Divider {
             partiallyConstructedQuotient.append(digits[i]); // append current digit to the partiallyConstructedQuotient
             finalReminder = Integer.parseInt(partiallyConstructedQuotient.toString()); // get finalReminder
             if (finalReminder >= divisor) {
-                Minuend.add(finalReminder);
+                minuend.add(finalReminder);
                 partiallyConstructedRemainder = finalReminder % divisor;
                 partiallyConstructedQuotient.replace(0, partiallyConstructedQuotient.length(),
                         Integer.toString(partiallyConstructedRemainder));
 
             }
         }
-        return Minuend;
+        return minuend;
     }
 
     /**
      * @param dividend
      * @param divisor
-     * @param subtrahends
+     * @param minuend
      * @return ArrayList numbers tab
      */
-    private ArrayList<Integer> getNumbersTab(Integer dividend, Integer divisor, ArrayList<Integer> subtrahends) {
+    private ArrayList<Integer> getNumbersTab(Integer dividend, Integer divisor, ArrayList<Integer> minuend, int longDividend) {
         final StringBuilder partiallyConstructedQuotient = new StringBuilder(); // write format reminder
         ArrayList<Integer> tabs = new ArrayList<>();
-        String[] digits = String.valueOf(dividend).split("");
+        String[] digits = String.valueOf(Math.abs(dividend)).split("");
         int finalReminder; // declared partially-constructed quotient
         int partiallyConstructedRemainder; // declared partially-constructed remainder
         int tab = 0;
         for (int i = 0, y = 0; i < digits.length; i++) {
             partiallyConstructedQuotient.append(digits[i]); // append current digit to the partiallyConstructedQuotient
             finalReminder = Integer.parseInt(partiallyConstructedQuotient.toString()); // get finalReminder
-            if (finalReminder >= divisor) { // append 0 if finalReminder < divisor
-                partiallyConstructedRemainder = finalReminder % divisor;
-                tab = (i + 2) - numberDigit(subtrahends.get(y)).size();
-                tabs.add(tab);
+            if (finalReminder >= Math.abs(divisor)) { // append 0 if finalReminder < divisor
+                partiallyConstructedRemainder = finalReminder % Math.abs(divisor);
+                if (dividend < 0) {
+                    if (y == 0) {
+                        tab = (i + 2) - numberDigit(minuend.get(y)).size();
+                        tabs.add(tab);
+
+                    } else {
+                        tab = (i + 3) - numberDigit(minuend.get(y)).size();
+                        tabs.add(tab);
+
+                    }
+                } else {
+                    tab = (i + 2) - numberDigit(minuend.get(y)).size();
+                    tabs.add(tab);
+
+                }
                 partiallyConstructedQuotient.replace(0, partiallyConstructedQuotient.length(),
                         Integer.toString(partiallyConstructedRemainder));
                 y++;
@@ -165,18 +190,28 @@ public class Divider {
      * @param subtrahend
      * @return long last tab
      */
-    private int getLongLastTab(Integer remainder, int longDividend, ArrayList<Integer> longMinued, ArrayList<Integer> subtrahend) {
+    private int getLongLastTab(Integer remainder, int longDividend, ArrayList<Integer> longMinued, ArrayList<Integer> subtrahend, int dividend, int divisor) {
         int longRemainder = numberDigit(remainder).size();
         int result = longDividend - longRemainder;
-        int LongLastSubstrahend = numberDigit(subtrahend.get(subtrahend.size() - 1)).size();
+        int LongLastSubtrahend = numberDigit(subtrahend.get(subtrahend.size() - 1)).size();
         int LongLastMinued = longMinued.get(longMinued.size() - 1);
-        if (LongLastSubstrahend <= LongLastMinued) {
+        if (LongLastSubtrahend <= LongLastMinued) {
             result += 1;
         }
         if (result > longDividend) {
             result -= 1;
         }
+        if (dividend < 0 | divisor < 0) {
+            result = (longDividend + 1 - longRemainder);
+        }
+        if (dividend > 0 & divisor < 0)
+        {
+            if (longRemainder == 0) {
+                result = (longDividend + 1 - longRemainder) - 1;
+            }
+        }
         return result;
+
     }
 
     /**
@@ -192,8 +227,25 @@ public class Divider {
      * @param subtrahend
      * @return tab for format string
      */
-    private int getTabTwoForStringTwo(ArrayList<Integer> subtrahend) {
+    private int getTabTwoForStringTwo(ArrayList<Integer> subtrahend, int dividend) {
         return numberDigit(subtrahend.get(0)).size() + 2;
+    }
+
+    /**
+     * @param longChar
+     * @return long char mines One
+     */
+    private int getTabTwoForStringThree(Integer longChar, int dividend, int divisor) {
+        if (dividend < 0) {
+            if (divisor < 0) {
+                return longChar - 1;
+            }
+            return longChar - 2;
+        }
+        if (divisor < 0) {
+            return longChar - 2;
+        }
+        return longChar - 1;
     }
 
     /**
@@ -201,6 +253,9 @@ public class Divider {
      * @return number length
      */
     private int getLongChar(Integer quotient) {
+        if (quotient < 0) {
+            return numberDigit(quotient).size() + 1;
+        }
         return numberDigit(quotient).size();
     }
 
@@ -244,13 +299,5 @@ public class Divider {
      */
     private int getNumbersСycleMinesOne(Integer numbersСycle) {
         return (int) (numbersСycle.longValue() - 1);
-    }
-
-    /**
-     * @param longChar
-     * @return long char mines One
-     */
-    private int getlongCharMinesOne(Integer longChar) {
-        return longChar - 1;
     }
 }
