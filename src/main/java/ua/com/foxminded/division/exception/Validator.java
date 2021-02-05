@@ -36,6 +36,10 @@ public class Validator {
     public void argumentLargeExceptions(String arg, String arg1) { //checking can wi put string in int
         try {
             Integer dividend = Integer.valueOf (arg);
+        } catch (RuntimeException e) {
+            throw new RuntimeException ("You can to enter max ten digits in one value.");
+        }
+        try {
             Integer divisor = Integer.valueOf (arg1);
         } catch (RuntimeException e) {
             throw new RuntimeException ("You can to enter max ten digits in one value.");
