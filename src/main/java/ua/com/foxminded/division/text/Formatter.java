@@ -4,8 +4,7 @@ import ua.com.foxminded.division.model.Result;
 
 import java.util.List;
 /**
- * Date: Feb 01-2021 Class make integer division without
- * fractional string part
+ * Date: Feb 01-2021 Class make format string
  *
  * @author Aleksandr Serogin
  * @version 1.0001
@@ -86,9 +85,7 @@ public class Formatter {
                 break;
             }
         }
-
         finalString.insert(index[2], assemblyString(tabTwoForStringThree, ' ') + "│" + quotient.toString());
-
         finalString.insert(index[1], assemblyString(tabOneForStringTwo, ' ') + "│" + assemblyString(longChar, '-'));
         if (dividend < 0) {
             finalString.insert(tabTwoForStringTwo, assemblyString(2, ' '));

@@ -2,6 +2,7 @@ package ua.com.foxminded.division.exception;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ua.com.foxminded.division.Main;
 import ua.com.foxminded.division.math.Divider;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -45,5 +46,17 @@ public class ExceptionTest {
                 IllegalArgumentException.class,
                 () -> divider.divide(12, 122));
         assertEquals("Divisor cannot be greater than dividend.", thrown.getMessage());
+    }
+
+    @Test
+    public void When_NumberLargeTen_Expect_ExceptionWithSuperType() {
+        String[] nembers = new String[2];
+        nembers[0] =("123465789102");
+        nembers[1] =("1");
+
+        RuntimeException thrown = assertThrows(
+                RuntimeException.class,
+                () -> Main.main(nembers));
+        assertEquals("You can to enter max ten digits in one value.", thrown.getMessage());
     }
 }

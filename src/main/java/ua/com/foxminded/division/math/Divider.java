@@ -17,8 +17,6 @@ import java.util.stream.IntStream;
 
 public class Divider {
 
-    private ArrayList<Integer> numbersTab;
-
     /**
      * @param dividend
      * @param divisor
@@ -164,16 +162,13 @@ public class Divider {
                     if (y == 0) {
                         tab = (i + 2) - numberDigit(minuend.get(y)).size();
                         tabs.add(tab);
-
                     } else {
                         tab = (i + 3) - numberDigit(minuend.get(y)).size();
                         tabs.add(tab);
-
                     }
                 } else {
                     tab = (i + 2) - numberDigit(minuend.get(y)).size();
                     tabs.add(tab);
-
                 }
                 partiallyConstructedQuotient.replace(0, partiallyConstructedQuotient.length(),
                         Integer.toString(partiallyConstructedRemainder));

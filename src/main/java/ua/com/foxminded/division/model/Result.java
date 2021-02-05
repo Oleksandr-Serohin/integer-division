@@ -2,15 +2,14 @@ package ua.com.foxminded.division.model;
 
 import java.util.List;
 /**
- * Date: Feb 01-2021 Class make integer division without
- * fractional string part
+ * Date: Feb 01-2021 Class stores the calculated numbers
  *
  * @author Aleksandr Serogin
  * @version 1.0001
  */
 
 /**
- * saving incoming values
+ * saving incoming values and return them
  */
 public class Result {
 
@@ -153,26 +152,5 @@ public class Result {
         if (numbersTab != null ? !numbersTab.equals(result.numbersTab) : result.numbersTab != null) return false;
         if (longMinued != null ? !longMinued.equals(result.longMinued) : result.longMinued != null) return false;
         return numbersTabsMinesOne != null ? numbersTabsMinesOne.equals(result.numbersTabsMinesOne) : result.numbersTabsMinesOne == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = dividend;
-        result = 31 * result + divisor;
-        result = 31 * result + quotient;
-        result = 31 * result + remainder;
-        result = 31 * result + longChar;
-        result = 31 * result + (subtrahend != null ? subtrahend.hashCode() : 0);
-        result = 31 * result + (minuend != null ? minuend.hashCode() : 0);
-        result = 31 * result + (numbersTab != null ? numbersTab.hashCode() : 0);
-        result = 31 * result + numbersCycle;
-        result = 31 * result + (longMinued != null ? longMinued.hashCode() : 0);
-        result = 31 * result + longLastTab;
-        result = 31 * result + (numbersTabsMinesOne != null ? numbersTabsMinesOne.hashCode() : 0);
-        result = 31 * result + numbersСycleMinesOne;
-        result = 31 * result + tabOneForStringTwo;
-        result = 31 * result + tabTwoForStringTwo;
-        result = 31 * result + tabTwoForStringThree;
-        return result;
     }
 }

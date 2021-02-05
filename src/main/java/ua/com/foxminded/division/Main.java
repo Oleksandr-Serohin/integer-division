@@ -1,5 +1,6 @@
 package ua.com.foxminded.division;
 
+import ua.com.foxminded.division.exception.Validator;
 import ua.com.foxminded.division.math.Divider;
 import ua.com.foxminded.division.model.Result;
 import ua.com.foxminded.division.text.Formatter;
@@ -19,22 +20,20 @@ public class Main {
      *
      * @param args array of string arguments.
      */
-
     public static void main(String[] args) {
         if (args.length != 2) {
-            System.out.printf("You need to enter two values. Example: java Main 78945 4");
-            System.exit(1);
+            System.out.printf ("You need to enter two values. Example: java Main 78945 4");
+            System.exit (1);
         }
-        try {
-            Integer dividend = Integer.valueOf(args[0]);
-            Integer divisor = Integer.valueOf(args[1]);
-            Divider divider = new Divider();
-            Result result = divider.divide(dividend, divisor);
-            Formatter formatter = new Formatter();
-            String output = formatter.format(result);
-            System.out.printf(output);
-        } catch (NumberFormatException e) {
-            System.out.printf("You can to enter max ten digits in one value.");
-        }
+        Validator validator = new Validator ();
+        validator.argumentLargeExceptions (args[0], args[1]);
+        Integer dividend = Integer.valueOf (args[0]);
+        Integer divisor = Integer.valueOf (args[1]);
+        Divider divider = new Divider ();
+        Result result = divider.divide (dividend, divisor);
+        Formatter formatter = new Formatter ();
+        String output = formatter.format (result);
+        System.out.printf (output);
+
     }
 }
